@@ -1,8 +1,5 @@
 package com.example.demo;
 
-import com.example.demo.Administrator_Stage;
-import com.example.demo.Users;
-
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.scene.Scene;
@@ -40,21 +37,20 @@ public class Student_Login_Stage extends Application {
         GridPane.setHalignment(button, HPos.CENTER);
         rootGp.add(button, 2, 3);
         button.setOnAction(e -> {
-                    sid= tf.getText();
-                    Users_Login_Info.start();
-                    for (Users users : Users_Login_Info.list_s) {
-                        if (users.getid() == Integer.parseInt(tf.getText()) & users.getPassword().equals(pf.getText())) {
-                            Student_Stage stage1=new Student_Stage();
-                            stage.hide();
-                            try {
-                                stage1.start(new Stage());
-                            } catch (Exception ex) {
-                                throw new RuntimeException(ex);
-                            }
+            Users_Login_Info.start();
+                    if (Users_Login_Info.map_s.containsKey(Integer.parseInt(tf.getText()))&pf.getText().equals(Users_Login_Info.map_s.get(Integer.parseInt(tf.getText())))) {
+                        Administrator_Menu stage1=new Administrator_Menu();
+                        stage.hide();
+                        try {
+                            stage1.start(new Stage());
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
                         }
-
                     }
 
+                    else {
+                        System.out.println("账号或密码错误");
+                    }
                 }
         );
         Scene scene = new Scene(rootGp, 400, 200);

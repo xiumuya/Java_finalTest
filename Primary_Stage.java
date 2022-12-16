@@ -50,12 +50,9 @@ public class Primary_Stage extends Application {
                 }
         );
         button.setOnAction(e -> {
-                    sid= tf.getText();
-                    arrayList.add(sid);
-                    Users_Login_Info.start();
-                    for (Users users : Users_Login_Info.list_t) {
-                        if (users.getid() == Integer.parseInt(tf.getText()) & users.getPassword().equals(pf.getText())) {
-                            Administrator_Stage stage1=new Administrator_Stage();
+            Users_Login_Info.start();
+                        if (Users_Login_Info.map_t.containsKey(Integer.parseInt(tf.getText()))&pf.getText().equals(Users_Login_Info.map_t.get(Integer.parseInt(tf.getText())))) {
+                            Administrator_Menu stage1=new Administrator_Menu();
                             stage.hide();
                             try {
                                 stage1.start(new Stage());
@@ -64,8 +61,9 @@ public class Primary_Stage extends Application {
                             }
                         }
 
-                    }
-
+else {
+                            System.out.println("账号或密码错误");
+                        }
                 }
         );
         Scene scene = new Scene(rootGp, 400, 200);

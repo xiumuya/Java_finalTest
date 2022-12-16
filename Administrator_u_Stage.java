@@ -12,11 +12,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Administrator_Stage extends Application {
-    static ArrayList<String>array=new ArrayList<>();
+public class Administrator_u_Stage extends Application {
     private static final String driver="com.mysql.cj.jdbc.Driver";
     private static final String url="jdbc:mysql://localhost:3306/db6?useSSL=false";
     private static final String user="root";
@@ -53,8 +51,11 @@ public class Administrator_Stage extends Application {
         rootGp.setVgap(30);
         Button button =new Button("增加记录");
         Scanner input =new Scanner(System.in);
-        System.out.println("请输入查找的学号：");
+        System.out.println("请输入需要修改的学号：");
         String sid=input.next();
+        if(!Users_Login_Info.map_s.containsKey(Integer.parseInt(sid))){
+            System.out.println("修改失败,学号不存在!");
+        }
         try{
             conn = DriverManager.getConnection(url, user, password);
 
